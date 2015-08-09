@@ -1,0 +1,2 @@
+# DietSimsphere
+Headless modern Simsphere
