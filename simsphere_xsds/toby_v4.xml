@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Simsphere xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns="http://aber.ac.uk/simsphere"  
+           xsi:schemaLocation="simsphere.xsd">
+   
+        <Overpass RunDate="1999-08-04T11:00:00+06:00">
+			<SweepFractionalVegetationCover>0.1</SweepFractionalVegetationCover>
+			<SweepSurfaceMoistureAvail>0.1</SweepSurfaceMoistureAvail>
+            <Latitude>39.255</Latitude>
+            <Longitude>96.55</Longitude>
+            <Slope>0</Slope>
+            <Aspect>0</Aspect>
+            <Altitude>0.886</Altitude>
+        </Overpass>
+        <Vegetation>
+            <VegCommon>
+                <FractVegCover>50</FractVegCover>
+                <LeafAreaIndex>7</LeafAreaIndex>
+                <FoliageAlbedo>0.1</FoliageAlbedo>
+                <FoliageEmissivity  calculate="false">0.96</FoliageEmissivity>
+                <CI>300</CI>
+                <CO>300</CO>
+                <SurfOzoneConcentration>0</SurfOzoneConcentration>
+                <AirOzoneConcentration>0.08</AirOzoneConcentration>
+            </VegCommon>
+            <VegetationModelSelection ModelSelection="CarlsonLynn">
+                <Deardorff>
+                    <CuticularResistance>1000</CuticularResistance>
+                    <RelativeWaterVolume>10</RelativeWaterVolume>
+                    <BulkStomatalResistance>150</BulkStomatalResistance>
+                    <VolumetricWaterContent>0.08</VolumetricWaterContent>
+                </Deardorff>
+                <CarlsonLynn>
+                    <VegetationHeight>2</VegetationHeight>
+                    <LeafWidth>0.12</LeafWidth>
+                    <NoCapacitance>true</NoCapacitance>
+                </CarlsonLynn>
+            </VegetationModelSelection>
+        </Vegetation>
+        <Surface>
+            <SurfaceParams>
+                <SubstrateClimatologicalMeanTemp>24.6</SubstrateClimatologicalMeanTemp>
+                <ThermalInertia calculate="false">12</ThermalInertia>
+                <GroundAlbedo calculate="false">0.1</GroundAlbedo>
+                <GroundEmissivity>0.96</GroundEmissivity>
+            </SurfaceParams>
+            <HydrologicalParams>
+                <SurfaceMoistureAvail>0.5</SurfaceMoistureAvail>
+                <RootZoneMoistureAvail>0.75</RootZoneMoistureAvail>
+                <SubstrateMaxVolWaterContent>0.34</SubstrateMaxVolWaterContent>
+            </HydrologicalParams>
+            <SurfaceGeostrophicWind UseDefault="false">
+                <SGW_U>1.498</SGW_U>
+                <SGW_V>5.069</SGW_V>
+            </SurfaceGeostrophicWind>
+        </Surface>
+        <Meteorological>
+            <AtmosphericPrecipitableWater>3.13</AtmosphericPrecipitableWater>
+            <SurfaceRoughness>0.2</SurfaceRoughness>
+            <ObstacleHeight>1.0</ObstacleHeight>
+            <CloudFract>1</CloudFract>
+            <UseCloudCover>false</UseCloudCover>
+        </Meteorological>
+
+    <Plants>
+        <PlantSelection ID="Corn"/>
+        <PlantSet>
+            <Plant ID="Alfalfa">                
+                <TemperatureRange MinTemperature="5" MaxTemperature="50"/>
+                <MinStomatalResistance>125</MinStomatalResistance>
+                <Beta>0.02</Beta>
+                <B1>-8e-05</B1>
+                <B2>10</B2>
+                <CriticalLeafWaterPot>5</CriticalLeafWaterPot>
+                <CriticalSolarParam>50</CriticalSolarParam>
+                <CuticleResistance>2000</CuticleResistance>
+                <StemResistance>0.028</StemResistance>
+                <FractXylemPot>0.5</FractXylemPot>
+                <FractStemResistance>0.5</FractStemResistance>
+                <Rkocap>50</Rkocap>
+                <Rccap>1</Rccap>
+                <Rzcap>4</Rzcap>
+                <InitialPlantWaterVol>0.01</InitialPlantWaterVol>
+                <Zstini>0.01</Zstini>
+            </Plant>            
+            <Plant ID="Clover">
+                <TemperatureRange MinTemperature="5" MaxTemperature="50"/>
+                <MinStomatalResistance>50</MinStomatalResistance>
+                <Beta>0</Beta>
+                <B1>-0.0001</B1>
+                <B2>10</B2>
+                <CriticalLeafWaterPot>5</CriticalLeafWaterPot>
+                <CriticalSolarParam>225</CriticalSolarParam>
+                <CuticleResistance>2000</CuticleResistance>
+                <StemResistance>0.047</StemResistance>
+                <FractXylemPot>0.5</FractXylemPot>
+                <FractStemResistance>0.5</FractStemResistance>
+                <Rkocap>50</Rkocap>
+                <Rccap>1</Rccap>
+                <Rzcap>4</Rzcap>
+                <InitialPlantWaterVol>0.01</InitialPlantWaterVol>
+                <Zstini>0.01</Zstini>
+            </Plant>
+            <Plant ID="Coniferous Forest">                
+                <TemperatureRange MinTemperature="5" MaxTemperature="50"/>
+                <MinStomatalResistance>350</MinStomatalResistance>
+                <Beta>0</Beta>
+                <B1>-3e-07</B1>
+                <B2>1.429</B2>
+                <CriticalLeafWaterPot>5</CriticalLeafWaterPot>
+                <CriticalSolarParam>225</CriticalSolarParam>
+                <CuticleResistance>2000</CuticleResistance>
+                <StemResistance>0.04</StemResistance>
+                <FractXylemPot>0.5</FractXylemPot>
+                <FractStemResistance>0.5</FractStemResistance>
+                <Rkocap>50</Rkocap>
+                <Rccap>1</Rccap>
+                <Rzcap>4</Rzcap>
+                <InitialPlantWaterVol>0.01</InitialPlantWaterVol>
+                <Zstini>0.01</Zstini>
+            </Plant>
+            <Plant ID="Corn">                
+                <TemperatureRange MinTemperature="5" MaxTemperature="50"/>
+                <MinStomatalResistance>50</MinStomatalResistance>
+                <Beta>0</Beta>
+                <B1>-2e-05</B1>
+                <B2>3</B2>
+                <CriticalLeafWaterPot>5</CriticalLeafWaterPot>
+                <CriticalSolarParam>300</CriticalSolarParam>
+                <CuticleResistance>1000</CuticleResistance>
+                <StemResistance>0.05</StemResistance>
+                <FractXylemPot>0.5</FractXylemPot>
+                <FractStemResistance>0.5</FractStemResistance>
+                <Rkocap>50</Rkocap>
+                <Rccap>1</Rccap>
+                <Rzcap>4</Rzcap>
+                <InitialPlantWaterVol>0.01</InitialPlantWaterVol>
+                <Zstini>0.01</Zstini>
+            </Plant>
+            <Plant ID="Cultivated C3 Grasses">                
+                <TemperatureRange MinTemperature="5" MaxTemperature="50"/>
+                <MinStomatalResistance>25</MinStomatalResistance>
+                <Beta>0</Beta>
+                <B1>-4e-06</B1>
+                <B2>10</B2>
+                <CriticalLeafWaterPot>5</CriticalLeafWaterPot>
+                <CriticalSolarParam>50</CriticalSolarParam>
+                <CuticleResistance>2000</CuticleResistance>
+                <StemResistance>0.04</StemResistance>
+                <FractXylemPot>0.5</FractXylemPot>
+                <FractStemResistance>0.5</FractStemResistance>
+                <Rkocap>50</Rkocap>
+                <Rccap>1</Rccap>
+                <Rzcap>4</Rzcap>
+                <InitialPlantWaterVol>0.01</InitialPlantWaterVol>
+                <Zstini>0.01</Zstini>
+            </Plant>
+            <Plant ID="Deciduous Forest">                
+                <TemperatureRange MinTemperature="5" MaxTemperature="50"/>
+                <MinStomatalResistance>350</MinStomatalResistance>
+                <Beta>0</Beta>
+                <B1>-3e-07</B1>
+                <B2>1.429</B2>
+                <CriticalLeafWaterPot>5</CriticalLeafWaterPot>
+                <CriticalSolarParam>225</CriticalSolarParam>
+                <CuticleResistance>2000</CuticleResistance>
+                <StemResistance>0.04</StemResistance>
+                <FractXylemPot>0.5</FractXylemPot>
+                <FractStemResistance>0.5</FractStemResistance>
+                <Rkocap>50</Rkocap>
+                <Rccap>1</Rccap>
+                <Rzcap>4</Rzcap>
+                <InitialPlantWaterVol>0.01</InitialPlantWaterVol>
+                <Zstini>0.01</Zstini>
+            </Plant>
+            <Plant ID="Deciduous Fruit Trees">                
+                <TemperatureRange MinTemperature="5" MaxTemperature="50"/>
+                <MinStomatalResistance>350</MinStomatalResistance>
+                <Beta>0</Beta>
+                <B1>-3e-07</B1>
+                <B2>1.429</B2>
+                <CriticalLeafWaterPot>5</CriticalLeafWaterPot>
+                <CriticalSolarParam>225</CriticalSolarParam>
+                <CuticleResistance>2000</CuticleResistance>
+                <StemResistance>0.04</StemResistance>
+                <FractXylemPot>0.5</FractXylemPot>
+                <FractStemResistance>0.5</FractStemResistance>
+                <Rkocap>50</Rkocap>
+                <Rccap>1</Rccap>
+                <Rzcap>4</Rzcap>
+                <InitialPlantWaterVol>0.01</InitialPlantWaterVol>
+                <Zstini>0.01</Zstini>
+            </Plant>
+            <Plant ID="Deciduous Woody Plants">
+                <TemperatureRange MinTemperature="5" MaxTemperature="50"/>
+                <MinStomatalResistance>350</MinStomatalResistance>
+                <Beta>0</Beta>
+                <B1>-3e-07</B1>
+                <B2>1.429</B2>
+                <CriticalLeafWaterPot>5</CriticalLeafWaterPot>
+                <CriticalSolarParam>225</CriticalSolarParam>
+                <CuticleResistance>2000</CuticleResistance>
+                <StemResistance>0.04</StemResistance>
+                <FractXylemPot>0.5</FractXylemPot>
+                <FractStemResistance>0.5</FractStemResistance>
+                <Rkocap>50</Rkocap>
+                <Rccap>1</Rccap>
+                <Rzcap>4</Rzcap>
+                <InitialPlantWaterVol>0.01</InitialPlantWaterVol>
+                <Zstini>0.01</Zstini>
+            </Plant>
+            <Plant ID="Desert and Steppe Shrubs">
+                <TemperatureRange MinTemperature="5" MaxTemperature="50"/>
+                <MinStomatalResistance>350</MinStomatalResistance>
+                <Beta>0</Beta>
+                <B1>-3e-07</B1>
+                <B2>1.429</B2>
+                <CriticalLeafWaterPot>5</CriticalLeafWaterPot>
+                <CriticalSolarParam>225</CriticalSolarParam>
+                <CuticleResistance>2000</CuticleResistance>
+                <StemResistance>0.04</StemResistance>
+                <FractXylemPot>0.5</FractXylemPot>
+                <FractStemResistance>0.5</FractStemResistance>
+                <Rkocap>50</Rkocap>
+                <Rccap>1</Rccap>
+                <Rzcap>4</Rzcap>
+                <InitialPlantWaterVol>0.01</InitialPlantWaterVol>
+                <Zstini>0.01</Zstini>
+            </Plant>
+            <Plant ID="Evergreen Conifers">                
+                <TemperatureRange MinTemperature="5" MaxTemperature="50"/>
+                <MinStomatalResistance>350</MinStomatalResistance>
+                <Beta>0</Beta>
+                <B1>-3e-07</B1>
+                <B2>1.429</B2>
+                <CriticalLeafWaterPot>5</CriticalLeafWaterPot>
+                <CriticalSolarParam>225</CriticalSolarParam>
+                <CuticleResistance>2000</CuticleResistance>
+                <StemResistance>0.04</StemResistance>
+                <FractXylemPot>0.5</FractXylemPot>
+                <FractStemResistance>0.5</FractStemResistance>
+                <Rkocap>50</Rkocap>
+                <Rccap>1</Rccap>
+                <Rzcap>4</Rzcap>
+                <InitialPlantWaterVol>0.01</InitialPlantWaterVol>
+                <Zstini>0.01</Zstini>
+            </Plant>
+            <Plant ID="Evergreen Woody Plants">
+                <TemperatureRange MinTemperature="5" MaxTemperature="50"/>
+                <MinStomatalResistance>350</MinStomatalResistance>
+                <Beta>0</Beta>
+                <B1>-3e-07</B1>
+                <B2>1.429</B2>
+                <CriticalLeafWaterPot>5</CriticalLeafWaterPot>
+                <CriticalSolarParam>225</CriticalSolarParam>
+                <CuticleResistance>2000</CuticleResistance>
+                <StemResistance>0.04</StemResistance>
+                <FractXylemPot>0.5</FractXylemPot>
+                <FractStemResistance>0.5</FractStemResistance>
+                <Rkocap>50</Rkocap>
+                <Rccap>1</Rccap>
+                <Rzcap>4</Rzcap>
+                <InitialPlantWaterVol>0.01</InitialPlantWaterVol>
+                <Zstini>0.01</Zstini>
+            </Plant>
+            <Plant ID="Field Crop (No V Response)">                
+                <TemperatureRange MinTemperature="5" MaxTemperature="50"/>
+                <MinStomatalResistance>200</MinStomatalResistance>
+                <Beta>0</Beta>
+                <B1>-6e-07</B1>
+                <B2>2.5</B2>
+                <CriticalLeafWaterPot>5</CriticalLeafWaterPot>
+                <CriticalSolarParam>225</CriticalSolarParam>
+                <CuticleResistance>2000</CuticleResistance>
+                <StemResistance>0.044</StemResistance>
+                <FractXylemPot>0.5</FractXylemPot>
+                <FractStemResistance>0.5</FractStemResistance>
+                <Rkocap>50</Rkocap>
+                <Rccap>1</Rccap>
+                <Rzcap>4</Rzcap>
+                <InitialPlantWaterVol>0.01</InitialPlantWaterVol>
+                <Zstini>0.01</Zstini>
+            </Plant>
+            <Plant ID="Field Crop (V Response)">                
+                <TemperatureRange MinTemperature="5" MaxTemperature="50"/>
+                <MinStomatalResistance>200</MinStomatalResistance>
+                <Beta>0</Beta>
+                <B1>-6e-07</B1>
+                <B2>2.5</B2>
+                <CriticalLeafWaterPot>5</CriticalLeafWaterPot>
+                <CriticalSolarParam>225</CriticalSolarParam>
+                <CuticleResistance>2000</CuticleResistance>
+                <StemResistance>0.044</StemResistance>
+                <FractXylemPot>0.5</FractXylemPot>
+                <FractStemResistance>0.5</FractStemResistance>
+                <Rkocap>50</Rkocap>
+                <Rccap>1</Rccap>
+                <Rzcap>4</Rzcap>
+                <InitialPlantWaterVol>0.01</InitialPlantWaterVol>
+                <Zstini>0.01</Zstini>
+            </Plant>
+            <Plant ID="Herbacious Crop Plants">                
+                <TemperatureRange MinTemperature="5" MaxTemperature="50"/>
+                <MinStomatalResistance>350</MinStomatalResistance>
+                <Beta>0</Beta>
+                <B1>-3e-07</B1>
+                <B2>1.429</B2>
+                <CriticalLeafWaterPot>5</CriticalLeafWaterPot>
+                <CriticalSolarParam>225</CriticalSolarParam>
+                <CuticleResistance>2000</CuticleResistance>
+                <StemResistance>0.04</StemResistance>
+                <FractXylemPot>0.5</FractXylemPot>
+                <FractStemResistance>0.5</FractStemResistance>
+                <Rkocap>50</Rkocap>
+                <Rccap>1</Rccap>
+                <Rzcap>4</Rzcap>
+                <InitialPlantWaterVol>0.01</InitialPlantWaterVol>
+                <Zstini>0.01</Zstini>
+            </Plant>
+            <Plant ID="Herbs from Open Habitat">                
+                <TemperatureRange MinTemperature="5" MaxTemperature="50"/>
+                <MinStomatalResistance>350</MinStomatalResistance>
+                <Beta>0</Beta>
+                <B1>-3e-07</B1>
+                <B2>1.429</B2>
+                <CriticalLeafWaterPot>5</CriticalLeafWaterPot>
+                <CriticalSolarParam>225</CriticalSolarParam>
+                <CuticleResistance>2000</CuticleResistance>
+                <StemResistance>0.04</StemResistance>
+                <FractXylemPot>0.5</FractXylemPot>
+                <FractStemResistance>0.5</FractStemResistance>
+                <Rkocap>50</Rkocap>
+                <Rccap>1</Rccap>
+                <Rzcap>4</Rzcap>
+                <InitialPlantWaterVol>0.01</InitialPlantWaterVol>
+                <Zstini>0.01</Zstini>
+            </Plant>
+            <Plant ID="Herbs from Shaded Habitat">                
+                <TemperatureRange MinTemperature="5" MaxTemperature="50"/>
+                <MinStomatalResistance>350</MinStomatalResistance>
+                <Beta>0</Beta>
+                <B1>-3e-07</B1>
+                <B2>1.429</B2>
+                <CriticalLeafWaterPot>5</CriticalLeafWaterPot>
+                <CriticalSolarParam>225</CriticalSolarParam>
+                <CuticleResistance>2000</CuticleResistance>
+                <StemResistance>0.04</StemResistance>
+                <FractXylemPot>0.5</FractXylemPot>
+                <FractStemResistance>0.5</FractStemResistance>
+                <Rkocap>50</Rkocap>
+                <Rccap>1</Rccap>
+                <Rzcap>4</Rzcap>
+                <InitialPlantWaterVol>0.01</InitialPlantWaterVol>
+                <Zstini>0.01</Zstini>
+            </Plant>
+            <Plant ID="Mixed Forest">                
+               <TemperatureRange MinTemperature="5" MaxTemperature="50"/>
+                <MinStomatalResistance>200</MinStomatalResistance>
+                <Beta>0.03</Beta>
+                <B1>-5e-07</B1>
+                <B2>1.25</B2>
+                <CriticalLeafWaterPot>5</CriticalLeafWaterPot>
+                <CriticalSolarParam>300</CriticalSolarParam>
+                <CuticleResistance>2000</CuticleResistance>
+                <StemResistance>0.035</StemResistance>
+                <FractXylemPot>0.5</FractXylemPot>
+                <FractStemResistance>0.5</FractStemResistance>
+                <Rkocap>50</Rkocap>
+                <Rccap>1</Rccap>
+                <Rzcap>4</Rzcap>
+                <InitialPlantWaterVol>0.01</InitialPlantWaterVol>
+                <Zstini>0.01</Zstini>
+            </Plant>
+            <Plant ID="Soy bean">                
+                <TemperatureRange MinTemperature="5" MaxTemperature="50"/>
+                <MinStomatalResistance>50</MinStomatalResistance>
+                <Beta>0.062</Beta>
+                <B1>-2e-06</B1>
+                <B2>10</B2>
+                <CriticalLeafWaterPot>5</CriticalLeafWaterPot>
+                <CriticalSolarParam>300</CriticalSolarParam>
+                <CuticleResistance>2000</CuticleResistance>
+                <StemResistance>0.06</StemResistance>
+                <FractXylemPot>0.5</FractXylemPot>
+                <FractStemResistance>0.5</FractStemResistance>
+                <Rkocap>50</Rkocap>
+                <Rccap>1</Rccap>
+                <Rzcap>4</Rzcap>
+                <InitialPlantWaterVol>0.01</InitialPlantWaterVol>
+                <Zstini>0.01</Zstini>
+            </Plant>
+            <Plant ID="Succlents">                
+                <TemperatureRange MinTemperature="5" MaxTemperature="50"/>
+                <MinStomatalResistance>350</MinStomatalResistance>
+                <Beta>0</Beta>
+                <B1>-3e-07</B1>
+                <B2>1.429</B2>
+                <CriticalLeafWaterPot>5</CriticalLeafWaterPot>
+                <CriticalSolarParam>225</CriticalSolarParam>
+                <CuticleResistance>2000</CuticleResistance>
+                <StemResistance>0.04</StemResistance>
+                <FractXylemPot>0.5</FractXylemPot>
+                <FractStemResistance>0.5</FractStemResistance>
+                <Rkocap>50</Rkocap>
+                <Rccap>1</Rccap>
+                <Rzcap>4</Rzcap>
+                <InitialPlantWaterVol>0.01</InitialPlantWaterVol>
+                <Zstini>0.01</Zstini>
+            </Plant>
+            <Plant ID="Wheat">                
+                <TemperatureRange MinTemperature="5" MaxTemperature="50"/>
+                <MinStomatalResistance>75</MinStomatalResistance>
+                <Beta>0.05</Beta>
+                <B1>-1.3e-06</B1>
+                <B2>0.667</B2>
+                <CriticalLeafWaterPot>5</CriticalLeafWaterPot>
+                <CriticalSolarParam>225</CriticalSolarParam>
+                <CuticleResistance>2000</CuticleResistance>
+                <StemResistance>0.02</StemResistance>
+                <FractXylemPot>0.5</FractXylemPot>
+                <FractStemResistance>0.5</FractStemResistance>
+                <Rkocap>50</Rkocap>
+                <Rccap>1</Rccap>
+                <Rzcap>4</Rzcap>
+                <InitialPlantWaterVol>0.01</InitialPlantWaterVol>
+                <Zstini>0.01</Zstini>
+            </Plant>                                 
+        </PlantSet>
+    </Plants>
+    <Soils>
+        <SoilSelection ID="Sand"/>
+        <SoilSet>
+            <Soil ID="Clay loam">
+                <RKS>0.347</RKS>
+                <CosbyB>8.17</CosbyB>
+                <THMax>0.465</THMax>
+                <Psi>4.14</Psi>
+            </Soil>
+            <Soil ID="Light clay">
+                <RKS>0.138</RKS>
+                <CosbyB>11.55</CosbyB>
+                <THMax>0.468</THMax>
+                <Psi>5.31</Psi>
+            </Soil>
+            <Soil ID="Loam">
+                <RKS>0.479</RKS>
+                <CosbyB>5.25</CosbyB>
+                <THMax>0.439</THMax>
+                <Psi>4.71</Psi>
+            </Soil>
+            <Soil ID="Loam sand">
+                <RKS>1.995</RKS>
+                <CosbyB>4.26</CosbyB>
+                <THMax>0.421</THMax>
+                <Psi>1.75</Psi>
+            </Soil>
+            <Soil ID="Sand">
+                <RKS>6.607</RKS>
+                <CosbyB>2.79</CosbyB>
+                <THMax>0.339</THMax>
+                <Psi>2.32</Psi>
+            </Soil>
+            <Soil ID="Sandy clay">
+                <RKS>1.023</RKS>
+                <CosbyB>10.73</CosbyB>
+                <THMax>0.406</THMax>
+                <Psi>2.69</Psi>
+            </Soil>
+            <Soil ID="Sandy clay loam">
+                <RKS>0.631</RKS>
+                <CosbyB>6.77</CosbyB>
+                <THMax>0.404</THMax>
+                <Psi>3.1</Psi>
+            </Soil>
+            <Soil ID="Sandy loam">
+                <RKS>0.74</RKS>
+                <CosbyB>4.47</CosbyB>
+                <THMax>0.434</THMax>
+                <Psi>3.16</Psi>
+            </Soil>
+            <Soil ID="Silty clay">
+                <RKS>0.191</RKS>
+                <CosbyB>10.39</CosbyB>
+                <THMax>0.468</THMax>
+                <Psi>4.53</Psi>
+            </Soil>
+            <Soil ID="Silty clay loam">
+                <RKS>0.288</RKS>
+                <CosbyB>8.72</CosbyB>
+                <THMax>0.474</THMax>
+                <Psi>5.99</Psi>
+            </Soil>
+            <Soil ID="Silty loam">
+                <RKS>0.398</RKS>
+                <CosbyB>5.33</CosbyB>
+                <THMax>0.43</THMax>
+                <Psi>6.55</Psi>
+            </Soil>
+        </SoilSet>
+    </Soils>
+    <SoundingSet>
+        <Sounding AltAboveStation="0">
+            <WindDirection>180</WindDirection>
+            <WindSpeed>7</WindSpeed>
+            <Pressure>966</Pressure>
+            <Temperature>24</Temperature>
+            <DewPointDepression>5</DewPointDepression>
+        </Sounding>
+        <Sounding AltAboveStation="1000">
+            <WindDirection>185</WindDirection>
+            <WindSpeed>10</WindSpeed>
+            <Pressure>949</Pressure>
+            <Temperature>24</Temperature>
+            <DewPointDepression>5</DewPointDepression>
+        </Sounding>
+        <Sounding AltAboveStation="3000">
+            <WindDirection>225</WindDirection>
+            <WindSpeed>10</WindSpeed>
+            <Pressure>900</Pressure>
+            <Temperature>23</Temperature>
+            <DewPointDepression>3</DewPointDepression>
+        </Sounding>
+        <Sounding AltAboveStation="5000">
+            <WindDirection>240</WindDirection>
+            <WindSpeed>12</WindSpeed>
+            <Pressure>850</Pressure>
+            <Temperature>24</Temperature>
+            <DewPointDepression>8</DewPointDepression>
+        </Sounding>
+        <Sounding AltAboveStation="7000">
+            <WindDirection>225</WindDirection>
+            <WindSpeed>15</WindSpeed>
+            <Pressure>700</Pressure>
+            <Temperature>11</Temperature>
+            <DewPointDepression>7</DewPointDepression>
+        </Sounding>
+        <Sounding AltAboveStation="9000">
+            <WindDirection>215</WindDirection>
+            <WindSpeed>15</WindSpeed>
+            <Pressure>677</Pressure>
+            <Temperature>9</Temperature>
+            <DewPointDepression>7</DewPointDepression>
+        </Sounding>
+        <Sounding AltAboveStation="14000">
+            <WindDirection>230</WindDirection>
+            <WindSpeed>20</WindSpeed>
+            <Pressure>628</Pressure>
+            <Temperature>4</Temperature>
+            <DewPointDepression>6</DewPointDepression>
+        </Sounding>
+        <Sounding AltAboveStation="20000">
+            <WindDirection>240</WindDirection>
+            <WindSpeed>25</WindSpeed>
+            <Pressure>606</Pressure>
+            <Temperature>2</Temperature>
+            <DewPointDepression>15</DewPointDepression>
+        </Sounding>
+        <Sounding AltAboveStation="30000">
+            <WindDirection>245</WindDirection>
+            <WindSpeed>44</WindSpeed>
+            <Pressure>612</Pressure>
+            <Temperature>2</Temperature>
+            <DewPointDepression>7</DewPointDepression>
+        </Sounding>
+        <Sounding AltAboveStation="41000">
+            <WindDirection>255</WindDirection>
+            <WindSpeed>43</WindSpeed>
+            <Pressure>530</Pressure>
+            <Temperature>-7</Temperature>
+            <DewPointDepression>17</DewPointDepression>
+        </Sounding>
+        <Sounding AltAboveStation="54000">
+            <WindDirection>195</WindDirection>
+            <WindSpeed>14</WindSpeed>
+            <Pressure>460</Pressure>
+            <Temperature>-10</Temperature>
+            <DewPointDepression>30</DewPointDepression>
+        </Sounding>                  
+    </SoundingSet>
+</Simsphere>

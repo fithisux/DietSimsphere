@@ -1,0 +1,1168 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="xs3p/xs3p.xsl"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<xsd:schema version="1.0" targetNamespace="http://aber.ac.uk/simsphere" xmlns:simsphere="http://aber.ac.uk/simsphere" xmlns:xsd="http://www.w3.org/2001/XMLSchema"    elementFormDefault="qualified">
+
+<xsd:annotation>
+    <xsd:documentation>
+
+
+ Copyright (C) 2015 Vasileios Anagnostopoulos
+
+ This program is free software; you can redistribute it and/or
+ modify it under the terms of the GNU General Public License
+ as published by the Free Software Foundation; either version 2
+ of the License, or (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+    </xsd:documentation>
+  </xsd:annotation>
+
+    <xsd:simpleType name="AltAboveStationType">
+                        <xsd:restriction base="xsd:integer">
+                            <xsd:minInclusive value="0"/>
+                            <xsd:maxInclusive value="60000"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                    
+    <xsd:element name="Sounding">
+        <xsd:annotation>
+            <xsd:documentation>
+                Holds sounding measuremenets
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="WindDirection">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Wind direction in degrees
+                        </xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:float">
+                            <xsd:minInclusive value="0"/>
+                            <xsd:maxInclusive value="360"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="WindSpeed">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Wind speed in kts
+                        </xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:float">
+                            <xsd:minInclusive value="0"/>
+                            <xsd:maxInclusive value="100"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>                
+                <xsd:element name="Pressure">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Pressure in (mB)
+                        </xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:float">
+                            <xsd:minInclusive value="0"/>
+                            <xsd:maxInclusive value="1100"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="Temperature">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Temperature (C)
+                        </xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:float">
+                            <xsd:minInclusive value="-100"/>
+                            <xsd:maxInclusive value="100"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="DewPointDepression">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            T - Td (C)
+                        </xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:float">
+                            <xsd:minInclusive value="0"/>
+                            <xsd:maxInclusive value="50"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+            </xsd:sequence>
+            <xsd:attribute name="AltAboveStation" type="simsphere:AltAboveStationType">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Altitude above station in (ft), integral value
+                        </xsd:documentation>
+                    </xsd:annotation>                    
+                </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="SoundingSet">		
+        <xsd:annotation>
+            <xsd:documentation>
+                A set of sounding measurements. At least one sounding must be at AltAboveStation=0ft and AltAboveStation must be unique
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="simsphere:Sounding" minOccurs="1" maxOccurs="unbounded"/>
+            </xsd:sequence>
+            <xsd:assert test="count(./simsphere:Sounding[@AltAboveStation eq 0]) gt 0"/>
+        </xsd:complexType>
+        <xsd:unique name="unique-height">
+            <xsd:selector xpath="./simsphere:Sounding"/>
+            <xsd:field xpath="@AltAboveStation"/>
+        </xsd:unique>
+    </xsd:element>
+
+	
+    <xsd:element name="Soil">
+        <xsd:complexType>
+            <xsd:sequence>                
+                <xsd:element name="RKS">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            RKS.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:float">
+                            <xsd:minInclusive value="0"/>
+                            <xsd:maxInclusive value="10"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="CosbyB">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            CosbyB.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:float">
+                            <xsd:minInclusive value="2"/>
+                            <xsd:maxInclusive value="12"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="THMax">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            THmax.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:float">
+                            <xsd:minInclusive value="0.3"/>
+                            <xsd:maxInclusive value="0.5"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="Psi">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Psi.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:float">
+                            <xsd:minInclusive value="1"/>
+                            <xsd:maxInclusive value="7"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+            </xsd:sequence>
+            <xsd:attribute name="ID" type="xsd:string"/>
+        </xsd:complexType>        
+    </xsd:element>
+    <xsd:element name="SoilSet">
+        <xsd:annotation>
+            <xsd:documentation>
+                A set of soils. Must have at least one element.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="simsphere:Soil" minOccurs="1" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+        <xsd:key name="soilIDKey">
+            <xsd:selector xpath="./simsphere:Soil"/>
+            <xsd:field xpath="@ID"/>
+        </xsd:key> 
+    </xsd:element>
+    <xsd:element name="SoilSelection">
+        <xsd:annotation>
+            <xsd:documentation>
+                Use the parameter ID to select a soil by name.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:attribute name="ID" type="xsd:string"/>
+        </xsd:complexType>
+        
+    </xsd:element>
+    <xsd:element name="Soils">
+        <xsd:annotation>
+            <xsd:documentation>
+                Contains soils and a selection of a soil.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="simsphere:SoilSelection" minOccurs="1" maxOccurs="1"/>
+                <xsd:element ref="simsphere:SoilSet" minOccurs="1" maxOccurs="1"/>				
+            </xsd:sequence>
+        </xsd:complexType>
+        <xsd:keyref name="soilIDKeyRef" refer="simsphere:soilIDKey">
+            <xsd:selector xpath="./simsphere:SoilSelection"/>
+            <xsd:field xpath="@ID"/>
+        </xsd:keyref>
+    </xsd:element>
+
+<xsd:simpleType name="MinTemperatureType">
+   <xsd:annotation>
+                    <xsd:documentation>
+                        Min. Temperature (deg C).
+                    </xsd:documentation>
+                </xsd:annotation>
+                <xsd:restriction base="xsd:float">
+                        <xsd:minInclusive value="5"/>
+                        <xsd:maxInclusive value="25"/>
+                    </xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="MaxTemperatureType">
+<xsd:annotation>
+                    <xsd:documentation>
+                        Max. Temperature (deg C).
+                    </xsd:documentation>
+                </xsd:annotation>
+                <xsd:restriction base="xsd:float">
+                        <xsd:minInclusive value="20"/>
+                        <xsd:maxInclusive value="50"/>
+                    </xsd:restriction>
+</xsd:simpleType>
+
+<xsd:element name="TemperatureRange">
+    <xsd:complexType>
+        
+            <xsd:attribute name="MinTemperature" type="simsphere:MinTemperatureType"/>
+            <xsd:attribute name="MaxTemperature" type="simsphere:MaxTemperatureType"/>
+            <xsd:assert test="@MinTemperature le @MaxTemperature"/>
+           
+    </xsd:complexType>
+</xsd:element>
+
+
+       
+    <xsd:complexType name="PlantType">        
+                <xsd:sequence>
+                    <xsd:element ref="simsphere:TemperatureRange"/>
+                    <xsd:element name="MinStomatalResistance">
+                        <xsd:annotation>
+                            <xsd:documentation>
+                                Min. Stomaltal Resistance (sm-1).
+                            </xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:float">
+                                <xsd:minInclusive value="10"/>
+                                <xsd:maxInclusive value="500"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>               
+                    <xsd:element name="Beta">
+                        <xsd:annotation>
+                            <xsd:documentation>
+                                Beta.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:float">
+                                <xsd:minInclusive value="0"/>
+                                <xsd:maxInclusive value="0.15"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="B1">
+                        <xsd:annotation>
+                            <xsd:documentation>
+                                B1.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:float">
+                                <xsd:minInclusive value="-0.5"/>
+                                <xsd:maxInclusive value="0"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="B2">
+                        <xsd:annotation>
+                            <xsd:documentation>
+                                B2.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:float">
+                                <xsd:minInclusive value="0"/>
+                                <xsd:maxInclusive value="10"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="CriticalLeafWaterPot">
+                        <xsd:annotation>
+                            <xsd:documentation>
+                                Critical leaf water potential (bar).
+                            </xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:float">
+                                <xsd:minInclusive value="5"/>
+                                <xsd:maxInclusive value="30"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="CriticalSolarParam">
+                        <xsd:annotation>
+                            <xsd:documentation>
+                                Critical solar parameter (Wm-2).
+                            </xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:float">
+                                <xsd:minInclusive value="25"/>
+                                <xsd:maxInclusive value="300"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="CuticleResistance">
+                        <xsd:annotation>
+                            <xsd:documentation>
+                                Cuticular resistance (sm-1).
+                            </xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:float">
+                                <xsd:minInclusive value="200"/>
+                                <xsd:maxInclusive value="2000"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="StemResistance">
+                        <xsd:annotation>
+                            <xsd:documentation>
+                                Stem resistance (sm-1).
+                            </xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:float">
+                                <xsd:minInclusive value="0.01"/>
+                                <xsd:maxInclusive value="0.15"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="FractXylemPot">
+                        <xsd:annotation>
+                            <xsd:documentation>
+                                Fraction of xylem potential.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:float">
+                                <xsd:minInclusive value="0"/>
+                                <xsd:maxInclusive value="1"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="FractStemResistance">
+                        <xsd:annotation>
+                            <xsd:documentation>
+                                Fraction of stem resistance.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:float">
+                                <xsd:minInclusive value="0"/>
+                                <xsd:maxInclusive value="1"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="Rkocap">
+                        <xsd:annotation>
+                            <xsd:documentation>
+                                Rkocap.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:float">
+                                <xsd:minInclusive value="0"/>
+                                <xsd:maxInclusive value="100"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="Rccap">
+                        <xsd:annotation>
+                            <xsd:documentation>
+                                Rccap.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:float">
+                                <xsd:minInclusive value="0"/>
+                                <xsd:maxInclusive value="2"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="Rzcap">
+                        <xsd:annotation>
+                            <xsd:documentation>
+                                Rzcap.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:float">
+                                <xsd:minInclusive value="0"/>
+                                <xsd:maxInclusive value="8"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>				
+                    </xsd:element>
+                    <xsd:element name="InitialPlantWaterVol">
+                        <xsd:annotation>
+                            <xsd:documentation>
+                                Initial plant water volume.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:float">
+                                <xsd:minInclusive value="0"/>
+                                <xsd:maxInclusive value="0.1"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="Zstini">
+                        <xsd:annotation>
+                            <xsd:documentation>
+                                Zstini.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:float">
+                                <xsd:minInclusive value="0"/>
+                                <xsd:maxInclusive value="0.1"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>                
+                </xsd:sequence>            
+    </xsd:complexType>	
+    
+    <xsd:element name="Plant" >
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="simsphere:PlantType">
+                    <xsd:attribute name="ID" type="xsd:string"/>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>       
+    </xsd:element>
+    <xsd:element name="PlantSet">
+        <xsd:annotation>
+            <xsd:documentation>
+                A set of plants. Must have at least one element.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="simsphere:Plant" minOccurs="1" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+        <xsd:key name="plantIDKey">
+            <xsd:selector xpath="./simsphere:Plant"/>
+            <xsd:field xpath="@ID"/>
+        </xsd:key>        
+    </xsd:element>
+    <xsd:element name="PlantSelection">
+        <xsd:annotation>
+            <xsd:documentation>
+                Use the parameter ID to select a plant by name.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:attribute name="ID" type="xsd:string"/>
+        </xsd:complexType>
+        
+    </xsd:element>
+    <xsd:element name="Plants">
+        <xsd:annotation>
+            <xsd:documentation>
+                Contains plants and a selection of a plant.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="simsphere:PlantSelection" minOccurs="1" maxOccurs="1"/>
+                <xsd:element ref="simsphere:PlantSet" minOccurs="1" maxOccurs="1"/>				
+            </xsd:sequence>
+        </xsd:complexType>
+        <xsd:keyref name="plantIDKeyRef" refer="simsphere:plantIDKey">
+            <xsd:selector xpath="./simsphere:PlantSelection"/>
+            <xsd:field xpath="@ID"/>
+        </xsd:keyref>
+    </xsd:element>
+
+
+	
+                    
+    <xsd:element name="Overpass">
+        <xsd:annotation>
+            <xsd:documentation>
+                An overpass element. The rundate attribute must be provided.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>    
+				<xsd:element name="SweepFractionalVegetationCover">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            The FractionalVegetationCover sweeping step.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:float">
+                            <xsd:minInclusive value="0.1"/>
+                            <xsd:maxInclusive value="1"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>    
+			<xsd:element name="SweepSurfaceMoistureAvail">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            The SurfaceMoistureAvail sweeping step.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:float">
+                            <xsd:minInclusive value="0.1"/>
+                            <xsd:maxInclusive value="1"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>    				
+                <xsd:element name="Latitude">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            The latitude in degrees.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:float">
+                            <xsd:minInclusive value="-90"/>
+                            <xsd:maxInclusive value="90"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="Longitude">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            The longitude in degrees.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:float">
+                            <xsd:minInclusive value="-180"/>
+                            <xsd:maxInclusive value="180"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="Slope">
+                    <xsd:annotation>
+                        <xsd:documentation>							
+                            The slope.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:float">
+                            <xsd:minInclusive value="0"/>
+                            <xsd:maxInclusive value="45"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="Aspect">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            The aspect.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:float">
+                            <xsd:minInclusive value="0"/>
+                            <xsd:maxInclusive value="360"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="Altitude">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            The station height.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:float">
+                            <xsd:minInclusive value="0"/>
+                            <xsd:maxInclusive value="15"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+            </xsd:sequence>
+            <xsd:attribute name="RunDate" type="xsd:dateTime" use="required"/>			
+        </xsd:complexType>
+    </xsd:element>
+	
+    <xsd:simpleType name="ThermalInertiaType">
+        <xsd:restriction base="xsd:float">
+            <xsd:minInclusive value="3.5"/>
+            <xsd:maxInclusive value="30"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="GroundAlbedoType">
+        <xsd:restriction base="xsd:float">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="1"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:element name="SurfaceParams">
+        <xsd:annotation>
+            <xsd:documentation>
+                Surface parametrization.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="SubstrateClimatologicalMeanTemp">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Substrate climatalogical mean temp. (C).
+                        </xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:float">
+                            <xsd:minInclusive value="-50"/>
+                            <xsd:maxInclusive value="120"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="ThermalInertia">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Thermal inertia (Wm-2K-1). Can be calculated internally.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:complexType>
+                        <xsd:simpleContent>
+                            <xsd:extension base="simsphere:ThermalInertiaType">
+                                <xsd:attribute name="calculate" type="xsd:boolean" use="required"/>
+                            </xsd:extension>
+                        </xsd:simpleContent>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="GroundAlbedo">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Ground albedo. Can be calculated internally.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:complexType>
+                        <xsd:simpleContent>
+                            <xsd:extension base="simsphere:GroundAlbedoType">
+                                <xsd:attribute name="calculate" type="xsd:boolean" use="required"/>
+                            </xsd:extension>
+                        </xsd:simpleContent>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="GroundEmissivity">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Ground emissivity.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:float">
+                            <xsd:minInclusive value="0.95"/>
+                            <xsd:maxInclusive value="1"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:simpleType name="HydrologicalParamsType">
+        <xsd:restriction base="xsd:float">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="1"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:element name="HydrologicalParams">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="SurfaceMoistureAvail" type="simsphere:HydrologicalParamsType">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Surf. moisture availability.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="RootZoneMoistureAvail" type="simsphere:HydrologicalParamsType">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Root zone moisture availability.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="SubstrateMaxVolWaterContent" type="simsphere:HydrologicalParamsType">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Substrate max. vol. water content.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="SurfaceGeostrophicWind">
+        <xsd:annotation>
+            <xsd:documentation>
+                Surface geostrophic wind.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="SGW_U">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            U (ms-1).
+                        </xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:float">
+                            <xsd:minInclusive value="-30"/>
+                            <xsd:maxInclusive value="30"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>					
+                </xsd:element>
+                <xsd:element name="SGW_V">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            V (ms-1).
+                        </xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:float">
+                            <xsd:minInclusive value="-30"/>
+                            <xsd:maxInclusive value="30"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+            </xsd:sequence>
+            <xsd:attribute name="UseDefault" type="xsd:boolean" use="required"/>
+        </xsd:complexType>		
+    </xsd:element>
+    <xsd:element name="Surface">
+        <xsd:annotation>
+            <xsd:documentation>
+                Surface parametrization.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="simsphere:SurfaceParams"/>
+                <xsd:element ref="simsphere:HydrologicalParams"/>
+                <xsd:element ref="simsphere:SurfaceGeostrophicWind"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+	
+    <xsd:simpleType name="FoliageEmissivityType">
+        <xsd:restriction base="xsd:float">
+            <xsd:minInclusive value="0.95"/>
+            <xsd:maxInclusive value="1"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:element name="VegCommon">
+        <xsd:annotation>
+            <xsd:documentation>							
+                Model independent parametrization of vegetation.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="FractVegCover">
+                    <xsd:annotation>
+                        <xsd:documentation>							
+                            Fractional vegetation cover (%).
+                        </xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:float">
+                            <xsd:minInclusive value="0"/>
+                            <xsd:maxInclusive value="100"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="LeafAreaIndex">
+                    <xsd:annotation>
+                        <xsd:documentation>							
+                            Leaf area index. Can be calculated internally.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:float">
+                            <xsd:minInclusive value="0"/>
+                            <xsd:maxInclusive value="10"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="FoliageAlbedo">
+                    <xsd:annotation>
+                        <xsd:documentation>							
+                            Foliage albedo.
+                        </xsd:documentation>
+                    </xsd:annotation>
+					<xsd:simpleType>
+                        <xsd:restriction base="xsd:float">
+                            <xsd:minInclusive value="0"/>
+                            <xsd:maxInclusive value="1"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>                    
+                </xsd:element>
+                <xsd:element name="FoliageEmissivity">
+                    <xsd:annotation>
+                        <xsd:documentation>							
+                            Foliage emissivity.  Can be calculated internally.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:complexType>
+                        <xsd:simpleContent>
+                            <xsd:extension base="simsphere:FoliageEmissivityType">
+                                <xsd:attribute name="calculate" type="xsd:boolean" use="required"/>
+                            </xsd:extension>
+                        </xsd:simpleContent>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="CI">
+                    <xsd:annotation>
+                        <xsd:documentation>							
+                            CI.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:float">
+                            <xsd:minInclusive value="110"/>
+                            <xsd:maxInclusive value="400"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="CO">
+                    <xsd:annotation>
+                        <xsd:documentation>							
+                            CO.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:float">
+                            <xsd:minInclusive value="250"/>
+                            <xsd:maxInclusive value="710"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="SurfOzoneConcentration">
+                    <xsd:annotation>
+                        <xsd:documentation>							
+                            Surface ozone concentration.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:float">
+                            <xsd:minInclusive value="0"/>
+                            <xsd:maxInclusive value="0.25"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="AirOzoneConcentration">
+                    <xsd:annotation>
+                        <xsd:documentation>							
+                            Air ozone concentration.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:float">
+                            <xsd:minInclusive value="0"/>
+                            <xsd:maxInclusive value="0.25"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+	
+    <xsd:element name="Deardorff">
+        <xsd:annotation>
+            <xsd:documentation>
+                Deardorff model of surface.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="CuticularResistance">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Cuticular resistance (sm-1).
+                        </xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:float">
+                            <xsd:minInclusive value="50"/>
+                            <xsd:maxInclusive value="1000"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="RelativeWaterVolume">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Relative water volume.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:float">
+                            <xsd:minInclusive value="1"/>
+                            <xsd:maxInclusive value="100"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="BulkStomatalResistance">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Bulk stomatal resistance (sm-1).
+                        </xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:float">
+                            <xsd:minInclusive value="0"/>
+                            <xsd:maxInclusive value="250"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="VolumetricWaterContent">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Volumetric water content at wilting point.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:float">
+                            <xsd:minInclusive value="0.05"/>
+                            <xsd:maxInclusive value="0.2"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="CarlsonLynn">
+        <xsd:annotation>
+            <xsd:documentation>
+                Carlson Lynn model of surface.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="VegetationHeight">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Vegetation height (m).
+                        </xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:float">
+                            <xsd:minInclusive value="0.02"/>
+                            <xsd:maxInclusive value="20"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="LeafWidth">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Leaf width (m).
+                        </xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:float">
+                            <xsd:minInclusive value="0.01"/>
+                            <xsd:maxInclusive value="1"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="NoCapacitance">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            No capacitance.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:boolean"></xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="Vegetation">
+        <xsd:annotation>
+            <xsd:documentation>
+                Vegetation parametrization.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="simsphere:VegCommon"/>
+                <xsd:element ref="simsphere:VegetationModelSelection"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="VegetationModelSelection">
+        <xsd:annotation>
+            <xsd:documentation>
+                Vegetation model selection. Currently the attribute ModelSelection can take two values. "Deardorff" or "CarlsonLynn".
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="simsphere:Deardorff"/>
+                <xsd:element ref="simsphere:CarlsonLynn"/>
+            </xsd:sequence>
+            <xsd:attribute name="ModelSelection" type="simsphere:ModelSelectionType" use="required" />
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:simpleType name="ModelSelectionType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Deardorff" />
+            <xsd:enumeration value="CarlsonLynn" />
+        </xsd:restriction>
+    </xsd:simpleType>
+	
+    <xsd:element name="AtmosphericPrecipitableWater">
+        <xsd:annotation>
+            <xsd:documentation>
+                Atmospheric precipitable water (cm)
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:float">
+                <xsd:minInclusive value="0.05"/>
+                <xsd:maxInclusive value="5"/>
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+    <xsd:element name="SurfaceRoughness">
+        <xsd:annotation>
+            <xsd:documentation>
+                Surface roughness (m)
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:float">
+                <xsd:minInclusive value="0.01"/>
+                <xsd:maxInclusive value="2"/>
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+    <xsd:element name="ObstacleHeight">
+        <xsd:annotation>
+            <xsd:documentation>
+                Obstacle height (m)
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:float">
+                <xsd:minInclusive value="0.01"/>
+                <xsd:maxInclusive value="2"/>
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+    <xsd:element name="CloudFract">
+        <xsd:annotation>
+            <xsd:documentation>
+                Fractional cloud cover (%)
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:float">
+                <xsd:minInclusive value="1"/>
+                <xsd:maxInclusive value="10"/>
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+    <xsd:element name="UseCloudCover">
+        <xsd:annotation>
+            <xsd:documentation>
+                Use cloud cover.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:boolean">
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+    <xsd:element name="Meteorological">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="simsphere:AtmosphericPrecipitableWater"/>
+                <xsd:element ref="simsphere:SurfaceRoughness"/>
+                <xsd:element ref="simsphere:ObstacleHeight"/>
+                <xsd:element ref="simsphere:CloudFract"/>
+                <xsd:element ref="simsphere:UseCloudCover"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+	
+    
+    <xsd:element name="Simsphere">
+        <xsd:annotation>
+            <xsd:documentation>
+                The simsphere parametrization specification.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="simsphere:Overpass"/>
+                <xsd:element ref="simsphere:Vegetation"/>
+                <xsd:element ref="simsphere:Surface"/>
+                <xsd:element ref="simsphere:Meteorological"/>		
+                <xsd:element ref="simsphere:Plants"/>
+                <xsd:element ref="simsphere:Soils"/>
+                <xsd:element ref="simsphere:SoundingSet"/>
+            </xsd:sequence>
+        </xsd:complexType>        
+    </xsd:element>
+</xsd:schema>
