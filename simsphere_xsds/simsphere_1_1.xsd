@@ -129,7 +129,7 @@ and open the template in the editor.
 			<xsd:sequence>
 				<xsd:element ref="simsphere:Sounding" minOccurs="1" maxOccurs="unbounded"/>
 			</xsd:sequence>
-			<!--<xsd:assert test="count(./simsphere:Sounding[@AltAboveStation eq 0]) gt 0"/>-->
+			<xsd:assert test="count(./simsphere:Sounding[@AltAboveStation eq 0]) gt 0"/>
 		</xsd:complexType>
 		<xsd:unique name="unique-height">
 			<xsd:selector xpath="./simsphere:Sounding"/>
@@ -264,7 +264,7 @@ and open the template in the editor.
 		<xsd:complexType>
 			<xsd:attribute name="MinTemperature" type="simsphere:MinTemperatureType"/>
 			<xsd:attribute name="MaxTemperature" type="simsphere:MaxTemperatureType"/>
-			<!--<xsd:assert test="@MinTemperature le @MaxTemperature"/>-->
+			<xsd:assert test="@MinTemperature le @MaxTemperature"/>
 		</xsd:complexType>
 	</xsd:element>
 	<xsd:complexType name="PlantType">

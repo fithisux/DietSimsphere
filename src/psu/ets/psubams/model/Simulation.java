@@ -108,13 +108,13 @@ public class Simulation implements Constants, SeriesNames {
                 ps.getMeteorological().getAtmosphericPrecipitableWater(), // omega
                 ps.getMeteorological().getSurfaceRoughness(), // zo
                 ps.getMeteorological().getObstacleHeight(), // obst_hgt
-                ps.getMeteorological().isUseCloudCover() ? 'T' : 'F', // cloud_flag
-                ps.getMeteorological().getCloudFract(), // cld_fract
+                ps.getMeteorological().getCloudCover().isUse() ? 'T' : 'F', // cloud_flag
+                ps.getMeteorological().getCloudCover().getValue(), // cld_fract
                 ps.getVegetation().getVegCommon().getFractVegCover(), // frveg
                 ps.getVegetation().getVegCommon().getLeafAreaIndex(), // xlai
                 ps.getVegetation().getVegCommon().getFoliageEmissivity().getValue(), // epsf,
                 ps.getVegetation().getVegCommon().getFoliageEmissivity().isCalculate() ? 'T' : 'F', // albedo_fflag
-                ps.getVegetation().getVegCommon().getFoliageAlbedo(), // albf
+                ps.getVegetation().getVegCommon().getFoliageAlbedo().getValue(), // albf
                 whichtype, // stmtype
                 ps.getVegetation().getVegetationModelSelection().getDeardorff().getRelativeWaterVolume(), // volrel
                 rmintemp, //rmin
@@ -300,13 +300,13 @@ public class Simulation implements Constants, SeriesNames {
                         ps.getMeteorological().getAtmosphericPrecipitableWater(), // omega
                         ps.getMeteorological().getSurfaceRoughness(), // zo
                         ps.getMeteorological().getObstacleHeight(), // obst_hgt
-                        ps.getMeteorological().isUseCloudCover() ? 'T' : 'F', // cloud_flag
-                        ps.getMeteorological().getCloudFract(), // cld_fract
+                        ps.getMeteorological().getCloudCover().isUse() ? 'T' : 'F', // cloud_flag
+                        ps.getMeteorological().getCloudCover().getValue(), // cld_fract
                         100 * fr, // frveg
                         ps.getVegetation().getVegCommon().getLeafAreaIndex(), // xlai
                         ps.getVegetation().getVegCommon().getFoliageEmissivity().getValue(), // epsf,
                         ps.getVegetation().getVegCommon().getFoliageEmissivity().isCalculate() ? 'T' : 'F', // albedo_fflag
-                        ps.getVegetation().getVegCommon().getFoliageAlbedo(), // albf
+                        ps.getVegetation().getVegCommon().getFoliageAlbedo().getValue(), // albf
                         whichtype, // stmtype
                         ps.getVegetation().getVegetationModelSelection().getDeardorff().getRelativeWaterVolume(), // volrel
                         rmintemp, //rmin
