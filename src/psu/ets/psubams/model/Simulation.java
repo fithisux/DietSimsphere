@@ -112,8 +112,8 @@ public class Simulation implements Constants, SeriesNames {
                 ps.getMeteorological().getCloudCover().getValue(), // cld_fract
                 ps.getVegetation().getVegCommon().getFractVegCover(), // frveg
                 ps.getVegetation().getVegCommon().getLeafAreaIndex(), // xlai
-                ps.getVegetation().getVegCommon().getFoliageEmissivity().getValue(), // epsf,
-                ps.getVegetation().getVegCommon().getFoliageEmissivity().isCalculate() ? 'T' : 'F', // albedo_fflag
+                ps.getVegetation().getVegCommon().getFoliageEmissivity(), // epsf,
+                ps.getVegetation().getVegCommon().getFoliageAlbedo().isCalculate() ? 'T' : 'F', // albedo_fflag
                 ps.getVegetation().getVegCommon().getFoliageAlbedo().getValue(), // albf
                 whichtype, // stmtype
                 ps.getVegetation().getVegetationModelSelection().getDeardorff().getRelativeWaterVolume(), // volrel
@@ -158,12 +158,12 @@ public class Simulation implements Constants, SeriesNames {
                 shelper.dewpoint, // dep 
                 shelper.winddirection, // dd0 
                 shelper.windspeed, // ff0 
-                shelper.altitude, // zh 
-                output_data, //output_data
+                shelper.altitude, // zh                 
                 data_graphs,
                 sounding_data, // sounding_data
-                false, //don't override monitor update (one-run diurnal) /*update by Yannis Konstas*/
-                ps.getOverpass().getRunDate().toGregorianCalendar().get(java.util.GregorianCalendar.DAY_OF_YEAR)
+                ps.getOverpass().getRunDate().toGregorianCalendar().get(java.util.GregorianCalendar.DAY_OF_YEAR),
+                output_data, //output_data
+                false //don't override monitor update (one-run diurnal) /*update by Yannis Konstas*/                
         );
         String[] output_names = {OUT_TIME, OUT_SHORTWAVE_FLUX, OUT_NET_RADIATION, OUT_SENSIBLE_HEAT_FLUX,
             OUT_LATENT_HEAT_FLUX, OUT_GROUND_FLUX, OUT_AIR_TEMP_50M, OUT_AIR_TEMP_10M,
@@ -304,8 +304,8 @@ public class Simulation implements Constants, SeriesNames {
                         ps.getMeteorological().getCloudCover().getValue(), // cld_fract
                         100 * fr, // frveg
                         ps.getVegetation().getVegCommon().getLeafAreaIndex(), // xlai
-                        ps.getVegetation().getVegCommon().getFoliageEmissivity().getValue(), // epsf,
-                        ps.getVegetation().getVegCommon().getFoliageEmissivity().isCalculate() ? 'T' : 'F', // albedo_fflag
+                        ps.getVegetation().getVegCommon().getFoliageEmissivity(), // epsf,
+                        ps.getVegetation().getVegCommon().getFoliageAlbedo().isCalculate() ? 'T' : 'F', // albedo_fflag
                         ps.getVegetation().getVegCommon().getFoliageAlbedo().getValue(), // albf
                         whichtype, // stmtype
                         ps.getVegetation().getVegetationModelSelection().getDeardorff().getRelativeWaterVolume(), // volrel
@@ -351,8 +351,6 @@ public class Simulation implements Constants, SeriesNames {
                         shelper.winddirection, // dd0 
                         shelper.windspeed, // ff0 
                         shelper.altitude, // zh 
-                        100 * ps.getOverpass().getSweepFractionalVegetationCover(), // frvegstep
-                        ps.getOverpass().getSweepSurfaceMoistureAvail(), // fstep
                         targettime,//targettime
                         no_row++,//
                         output_data, //output_data
@@ -382,5 +380,10 @@ public class Simulation implements Constants, SeriesNames {
 
         csvOutput.close();
     }
+    
+    
+    
+    
+    
 
 }

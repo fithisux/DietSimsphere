@@ -83,8 +83,8 @@ public class TestXSD {
         }
 
         try {
-            Simulation.runModel(customer, model_csv);
-            Simulation.runModelConv(customer, model_conv_csv);
+            CompactSimulation.runModel(customer, model_csv);
+            CompactSimulation.runModelConv(customer, model_conv_csv);
         } catch (Simulation.ModelException | IOException ex) {
             ex.printStackTrace();
             System.out.println(xmlFile.getName() + " cannot run computations ");

@@ -14,7 +14,7 @@
 			<FractVegCover>90</FractVegCover>
 			<LeafAreaIndex>4</LeafAreaIndex>
 			<FoliageAlbedo calculate="true">0.22</FoliageAlbedo>
-			<FoliageEmissivity calculate="true">0.97</FoliageEmissivity>
+			<FoliageEmissivity>0.97</FoliageEmissivity>
 			<CI>220</CI>
 			<CO>355</CO>
 			<SurfOzoneConcentration>0</SurfOzoneConcentration>

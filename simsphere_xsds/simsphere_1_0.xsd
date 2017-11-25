@@ -784,12 +784,6 @@ and open the template in the editor.
 			</xsd:sequence>
 		</xsd:complexType>
 	</xsd:element>
-	<xsd:simpleType name="FoliageEmissivityType">
-		<xsd:restriction base="xsd:float">
-			<xsd:minInclusive value="0.95"/>
-			<xsd:maxInclusive value="1"/>
-		</xsd:restriction>
-	</xsd:simpleType>
 	<xsd:simpleType name="CloudCoverType">
 		<xsd:restriction base="xsd:float">
 			<xsd:minInclusive value="0"/>
@@ -850,13 +844,12 @@ and open the template in the editor.
                             Foliage emissivity.  Can be calculated internally.
                         </xsd:documentation>
 					</xsd:annotation>
-					<xsd:complexType>
-						<xsd:simpleContent>
-							<xsd:extension base="simsphere:FoliageEmissivityType">
-								<xsd:attribute name="calculate" type="xsd:boolean" use="required"/>
-							</xsd:extension>
-						</xsd:simpleContent>
-					</xsd:complexType>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:float">
+							<xsd:minInclusive value="0.95"/>
+							<xsd:maxInclusive value="1"/>
+						</xsd:restriction>
+					</xsd:simpleType>
 				</xsd:element>
 				<xsd:element name="CI">
 					<xsd:annotation>
